@@ -1,24 +1,30 @@
+import requests
 import yfinance as yf
-import time
 
-AMD = yf.Ticker('AMD')
+Y = "Y"
+N = "N"
 
-s = "s"
-u = "u"
-UorS=input("U or S ")
+share = yf.Ticker(input("What share would you like?(In short form Ex msft or appl)"))
+HaveShares = input("Do you have any shares? Y/N")
+
+amount = share.info["currentPrice"]
+url = f"https://api.apilayer.com/exchangerates_data/convert?to=GBP&from=USD&amount={amount}"
+
+payload = {}
+headers= {
+  "apikey": "SylZpkQ5hnB3Dovy5adcj5OukR9hOEFV"
+}
+
+response = requests.request("GET", url, headers=headers, data = payload)
+
+status_code = response.status_code
+result = response.text
+data = response.json()
+
+if HaveShares.lower() == Y.lower():
+  SharesNum = float(input("Enter numner of shares"))
+  
 
 
-if UorS.lower() == u.lower():
-  while True:
-        shareprice_G = AMD.info['currentPrice']
-        shareprice = round(shareprice_G * 0.81)
-        print(shareprice)
-        time.sleep(1)
-
-elif UorS.lower()==s.lower():
-    while True:
-        shareprice_G = AMD.info['currentPrice']
-        shareprice = round(shareprice_G * 0.81)
-        mymon = round(shareprice * 2.899014,2)
-        print(mymon)
-        time.sleep(1)
+if HaveShares.lower() == N.lower():
+  print(data["result"])
