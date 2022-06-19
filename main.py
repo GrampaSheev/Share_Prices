@@ -4,7 +4,7 @@ import yfinance as yf
 Y = "Y"
 N = "N"
 
-share = yf.Ticker(input("What share would you like?(In short form Ex msft or appl)"))
+share = yf.Ticker(input("What share would you like?(Enter the Ticker/Stock Symbol ex: msft or appl)"))
 HaveShares = input("Do you have any shares? Y/N")
 
 amount = share.info["currentPrice"]
