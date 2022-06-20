@@ -9,12 +9,11 @@ share = yf.Ticker(input("What share would you like?(Enter the Ticker/Stock Symbo
 HaveShares = input("Do you have any shares? Y/N")
 
 #Currencies options
-to = input("Choose currency to convert too. Choises are USD/GBP/EUR/JPY/AUD/CAD/CHF/CNY/SEK/NZD")
-from = input("Choose currency to convert from. Choises are USD/GBP/EUR/JPY/AUD/CAD/CHF/CNY/SEK/NZD")
+OutputCurrency = input("Choose currency to convert too. Choises are USD/GBP/EUR/JPY/AUD/CAD/CHF/CNY/SEK/NZD")
 
 #Ticker and Exchange rates
 amount = share.info["currentPrice"]
-url = f"https://api.apilayer.com/exchangerates_data/convert?to={to}&from={from}&amount={amount}"
+url = f"https://api.apilayer.com/exchangerates_data/convert?to={OutputCurrency}&from=USD&amount={amount}"
 
 #Currencies
 USD = "$"
@@ -24,9 +23,9 @@ JPY = "¥"
 AUD = "$"
 CAD = "$"
 CHF = "CHf"
-CNY = "¥" 
-SEK = "Kr" 
-NZD ="$" 
+CNY = "¥"
+SEK = "Kr"
+NZD ="$"
 
 #Auth
 payload = {}
@@ -41,17 +40,17 @@ status_code = response.status_code
 result = response.text
 data = response.json()
 
-if data[] == 200:
-  #Owned
-  if HaveShares.lower() == Y.lower():
-    SharesNum = float(input("Enter numner of shares"))
-    AssetsOwned = SharesNum * data["result"] 
-    print(to, AssetsOwned) 
+if data == {'error': {'code': 'invalid_from_currency', 'message': 'You have entered an invalid "from" property. [Example: from=EUR]'}}:
+  print("Invalid Currency")
 
-
-  #Unowned
-  if HaveShares.lower() == N.lower():
-    print(to, data["result"])
 
 else:
-  print("Invalid Currency") 
+  # Owned
+  if HaveShares.lower() == Y.lower():
+    SharesNum = float(input("Enter numner of shares"))
+    AssetsOwned = SharesNum * data["result"]
+    print(OutputCurrency, AssetsOwned)
+
+  # Unowned
+  if HaveShares.lower() == N.lower():
+    print(OutputCurrency, data["result"])
