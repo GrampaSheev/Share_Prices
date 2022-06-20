@@ -9,8 +9,8 @@ share = yf.Ticker(input("What share would you like?(Enter the Ticker/Stock Symbo
 HaveShares = input("Do you have any shares? Y/N")
 
 #Currencies options
-to = input("Choose currency to convert too. Choises are USD/GBP/EUR")
-from = input("Choose currency to convert from. Choises are USD/GBP/EUR")
+to = input("Choose currency to convert too. Choises are USD/GBP/EUR/JPY/AUD/CAD/CHF/CNY/SEK/NZD")
+from = input("Choose currency to convert from. Choises are USD/GBP/EUR/JPY/AUD/CAD/CHF/CNY/SEK/NZD")
 
 #Ticker and Exchange rates
 amount = share.info["currentPrice"]
@@ -20,6 +20,13 @@ url = f"https://api.apilayer.com/exchangerates_data/convert?to={to}&from={from}&
 USD = "$"
 GBP = "£"
 EUR = "€"
+JPY = "¥"
+AUD = "$"
+CAD = "$"
+CHF = "CHf"
+CNY = "¥" 
+SEK = "Kr" 
+NZD ="$" 
 
 #Auth
 payload = {}
@@ -34,6 +41,7 @@ status_code = response.status_code
 result = response.text
 data = response.json()
 
+#if error code = 200
 
 #Owned
 if HaveShares.lower() == Y.lower():
@@ -45,3 +53,6 @@ if HaveShares.lower() == Y.lower():
 #Unowned
 if HaveShares.lower() == N.lower():
   print(to, data["result"])
+
+#else
+#print("invalid currency") 
