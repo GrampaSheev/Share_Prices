@@ -23,6 +23,8 @@ data = response.json()
 
 if HaveShares.lower() == Y.lower():
   SharesNum = float(input("Enter numner of shares"))
+  AssetsOwned = SharesNum * data["result"] 
+  print(AssetsOwned) 
   
 
 
