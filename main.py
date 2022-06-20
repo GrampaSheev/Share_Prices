@@ -41,18 +41,17 @@ status_code = response.status_code
 result = response.text
 data = response.json()
 
-#if error code = 200
+if data == 200:
+  #Owned
+  if HaveShares.lower() == Y.lower():
+    SharesNum = float(input("Enter numner of shares"))
+    AssetsOwned = SharesNum * data["result"] 
+    print(to, AssetsOwned) 
 
-#Owned
-if HaveShares.lower() == Y.lower():
-  SharesNum = float(input("Enter numner of shares"))
-  AssetsOwned = SharesNum * data["result"] 
-  print(to, AssetsOwned) 
-  
 
-#Unowned
-if HaveShares.lower() == N.lower():
-  print(to, data["result"])
+  #Unowned
+  if HaveShares.lower() == N.lower():
+    print(to, data["result"])
 
-#else
-#print("invalid currency") 
+else:
+  print("Invalid Currency") 
