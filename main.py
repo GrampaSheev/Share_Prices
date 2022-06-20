@@ -41,7 +41,7 @@ status_code = response.status_code
 result = response.text
 data = response.json()
 
-if data == 200:
+if data[] == 200:
   #Owned
   if HaveShares.lower() == Y.lower():
     SharesNum = float(input("Enter numner of shares"))
