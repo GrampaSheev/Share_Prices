@@ -31,7 +31,7 @@ def ShowResults():
         assets = data["result"]
 
     else:
-        assets = data["result"] * int(HowManyShares.get())
+        assets = data["result"] * float(HowManyShares.get())
 
 
     money = round(assets,2)
